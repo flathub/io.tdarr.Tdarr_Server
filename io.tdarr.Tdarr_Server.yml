@@ -1,0 +1,67 @@
+app-id: io.tdarr.Tdarr_Server
+runtime: org.gnome.Platform
+runtime-version: '50'
+sdk: org.gnome.Sdk
+command: tdarr-server-flatpak
+separate-locales: false
+
+build-options:
+  no-debuginfo: true
+
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --device=dri
+  - --filesystem=xdg-videos
+  - --talk-name=org.freedesktop.Notifications
+  - --talk-name=org.kde.StatusNotifierWatcher
+
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /share/doc
+  - /share/gtk-doc
+  - /share/man
+
+modules:
+  - dependencies/libayatana-appindicator3-0.1.yml
+
+  - name: tdarr-server
+    buildsystem: simple
+    build-commands:
+      - mkdir -p /app/tdarr/server
+      - cp -a . /app/tdarr/server/
+      - chmod +x /app/tdarr/server/Tdarr_Server
+      - chmod +x /app/tdarr/server/Tdarr_Server_Tray
+      - chmod +x /app/tdarr/server/runtime/Tdarr_Server_Runtime
+      - chmod +x /app/tdarr/server/runtime/pnpm
+    sources:
+      - type: archive
+        url: https://storage.tdarr.io/versions/2.71.01/linux_x64/Tdarr_Server.zip
+        sha256: 5721c8e06e073fe2f5d8734b5d4a4668ad400bc5875c3a16b03263b435da4b62
+        strip-components: 0
+
+  - name: tdarr-server-integration
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 tdarr-server-flatpak /app/bin/tdarr-server-flatpak
+      - install -Dm644 io.tdarr.Tdarr_Server.desktop /app/share/applications/io.tdarr.Tdarr_Server.desktop
+      - install -Dm644 io.tdarr.Tdarr_Server.metainfo.xml /app/share/metainfo/io.tdarr.Tdarr_Server.metainfo.xml
+      - install -Dm644 logo512.png /app/share/icons/hicolor/512x512/apps/io.tdarr.Tdarr_Server.png
+      - install -Dm644 LICENSE.md /app/share/licenses/io.tdarr.Tdarr_Server/LICENSE.md
+    sources:
+      - type: file
+        path: wrappers/tdarr-server-flatpak
+      - type: file
+        path: desktop/io.tdarr.Tdarr_Server.desktop
+      - type: file
+        path: metainfo/io.tdarr.Tdarr_Server.metainfo.xml
+      - type: file
+        path: icons/io.tdarr.Tdarr_Server.png
+        dest-filename: logo512.png
+      - type: file
+        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/master/LICENSE.md
+        sha256: 0dede92d4421de2668e268783a03c5834078f81a8c694f59900e43a40528c4cf
+        dest-filename: LICENSE.md

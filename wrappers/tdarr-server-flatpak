@@ -1,0 +1,42 @@
+#!/bin/sh
+set -eu
+
+export TDARR_FLATPAK=1
+export disableAutoUpdater=true
+export rootDataPath="${XDG_DATA_HOME:-${HOME}/.local/share}/tdarr/server"
+
+tray_pid=
+
+cleanup() {
+  if [ -n "${tray_pid}" ]; then
+    kill -TERM "${tray_pid}" 2>/dev/null || true
+  fi
+
+  if command -v pkill >/dev/null 2>&1; then
+    pkill -TERM -f '/app/tdarr/server/runtime/Tdarr_Server_Runtime' 2>/dev/null || true
+    pkill -TERM -f '/app/tdarr/server/Tdarr_Server($| )' 2>/dev/null || true
+    pkill -TERM -x Tdarr_Server_Runtime 2>/dev/null || true
+    pkill -TERM -x Tdarr_Server 2>/dev/null || true
+    sleep 1
+    pkill -KILL -f '/app/tdarr/server/runtime/Tdarr_Server_Runtime' 2>/dev/null || true
+    pkill -KILL -f '/app/tdarr/server/Tdarr_Server($| )' 2>/dev/null || true
+    pkill -KILL -x Tdarr_Server_Runtime 2>/dev/null || true
+    pkill -KILL -x Tdarr_Server 2>/dev/null || true
+  fi
+}
+
+trap 'cleanup; exit 143' INT TERM
+
+mkdir -p "${rootDataPath}"
+cd /app/tdarr/server
+
+/app/tdarr/server/Tdarr_Server_Tray "$@" &
+tray_pid=$!
+
+set +e
+wait "${tray_pid}"
+status=$?
+set -e
+
+cleanup
+exit "${status}"
