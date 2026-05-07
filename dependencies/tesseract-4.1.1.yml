@@ -1,0 +1,18 @@
+name: tesseract
+buildsystem: simple
+build-options:
+  env:
+    PKG_CONFIG_PATH: /app/lib/pkgconfig:/usr/lib/pkgconfig
+build-commands:
+  - ./autogen.sh
+  - CXXFLAGS="${CXXFLAGS:-} -include cstdint" ./configure --prefix=/app --disable-static --disable-graphics --disable-opencl
+  - sed -i 's/-march=native -mtune=native//g' src/arch/Makefile
+  - make -j${FLATPAK_BUILDER_N_JOBS}
+  - make install
+sources:
+  - type: archive
+    url: https://github.com/tesseract-ocr/tesseract/archive/refs/tags/4.1.1.tar.gz
+    sha256: 2a66ff0d8595bff8f04032165e6c936389b1e5727c3ce5a27b3e059d218db1cb
+cleanup:
+  - /bin
+  - /share/tessdata

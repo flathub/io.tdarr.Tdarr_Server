@@ -27,6 +27,9 @@ cleanup:
 
 modules:
   - dependencies/libayatana-appindicator3-0.1.yml
+  - dependencies/perl-5.42.2.yml
+  - dependencies/leptonica-1.79.0.yml
+  - dependencies/tesseract-4.1.1.yml
 
   - name: tdarr-server
     buildsystem: simple
@@ -37,6 +40,10 @@ modules:
       - chmod +x /app/tdarr/server/Tdarr_Server_Tray
       - chmod +x /app/tdarr/server/runtime/Tdarr_Server_Runtime
       - chmod +x /app/tdarr/server/runtime/pnpm
+      - sed -i '1s|^#!.*perl.*|#!/app/bin/perl -w|' /app/tdarr/server/node_modules/exiftool-vendored.pl/bin/exiftool
+      - chmod +x /app/tdarr/server/node_modules/exiftool-vendored.pl/bin/exiftool
+      - >-
+        sed -i 's|const env = { \.\.\.o.exiftoolEnv, LANG: "C" };|const env = { PATH: process.env.PATH, HOME: process.env.HOME, ...o.exiftoolEnv, LANG: "C" };|' /app/tdarr/server/node_modules/exiftool-vendored/dist/ExifTool.js
     sources:
       - type: archive
         url: https://storage.tdarr.io/versions/2.71.01/linux_x64/Tdarr_Server.zip
