@@ -1,6 +1,7 @@
 #!/bin/sh
 set -eu
 
+export TDARR_FLATPAK=1
 export enableAutoUpdater=false
 export rootDataPath="${XDG_DATA_HOME:-${HOME}/.local/share}/tdarr"
 
