@@ -1,9 +1,8 @@
 #!/bin/sh
 set -eu
 
-export TDARR_FLATPAK=1
-export disableAutoUpdater=true
-export rootDataPath="${XDG_DATA_HOME:-${HOME}/.local/share}/tdarr/server"
+export enableAutoUpdater=false
+export rootDataPath="${XDG_DATA_HOME:-${HOME}/.local/share}/tdarr"
 
 tray_pid=
 
