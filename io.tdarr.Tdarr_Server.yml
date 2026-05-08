@@ -81,8 +81,6 @@ modules:
       - chmod +x /app/tdarr/server/runtime/Tdarr_Server_Runtime
       - chmod +x /app/tdarr/server/runtime/pnpm
       - chmod +x /app/tdarr/server/node_modules/exiftool-vendored.pl/bin/exiftool
-      - >-
-        sed -i 's|const env = { \.\.\.o.exiftoolEnv, LANG: "C" };|const env = { PATH: process.env.PATH, HOME: process.env.HOME, ...o.exiftoolEnv, LANG: "C" };|' /app/tdarr/server/node_modules/exiftool-vendored/dist/ExifTool.js
     sources:
       - type: archive
         url: https://storage.tdarr.io/versions/2.71.01/linux_x64/Tdarr_Server.zip
@@ -90,6 +88,8 @@ modules:
         strip-components: 0
       - type: patch
         path: patches/exiftool-flatpak-perl.patch
+      - type: patch
+        path: patches/exiftool-flatpak-env.patch
 
   - name: tdarr-server-integration
     buildsystem: simple

@@ -1,0 +1,11 @@
+--- a/node_modules/exiftool-vendored/dist/ExifTool.js
++++ b/node_modules/exiftool-vendored/dist/ExifTool.js
+@@ -88,7 +88,7 @@ class ExifTool {
+             ...options,
+         };
+         const ignoreShebang = (_a = o.ignoreShebang) !== null && _a !== void 0 ? _a : _ignoreShebang();
+-        const env = { ...o.exiftoolEnv, LANG: "C" };
++        const env = { PATH: process.env.PATH, HOME: process.env.HOME, ...o.exiftoolEnv, LANG: "C" };
+         if ((0, String_1.notBlank)(process_1.default.env.EXIFTOOL_HOME) && (0, String_1.blank)(env.EXIFTOOL_HOME)) {
+             env.EXIFTOOL_HOME = process_1.default.env.EXIFTOOL_HOME;
+         }
