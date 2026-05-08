@@ -26,7 +26,7 @@ cleanup:
   - /share/man
 
 modules:
-  - dependencies/libayatana-appindicator3-0.1.yml
+  - shared-modules/libayatana-appindicator/libayatana-appindicator-gtk3.json
   - dependencies/perl-5.42.2.yml
   - dependencies/leptonica-1.79.0.yml
   - dependencies/tesseract-4.1.1.yml
