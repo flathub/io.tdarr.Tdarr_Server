@@ -1,0 +1,8 @@
+--- a/node_modules/exiftool-vendored.pl/bin/exiftool
++++ b/node_modules/exiftool-vendored.pl/bin/exiftool
+@@ -1,4 +1,4 @@
+-#!/usr/bin/perl -w
++#!/app/bin/perl -w
+ #------------------------------------------------------------------------------
+ # File:         exiftool
+ #

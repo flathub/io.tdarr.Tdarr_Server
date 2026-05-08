@@ -24,22 +24,6 @@ cleanup:
 
 modules:
   - shared-modules/libayatana-appindicator/libayatana-appindicator-gtk3.json
-  - name: perl
-    buildsystem: simple
-    build-options:
-      # Perl's installed tree fails flatpak-builder debugedit/eu-strip in rofiles.
-      no-debuginfo: true
-    build-commands:
-      - ./Configure -des -Dprefix=/app -Dvendorprefix=/app -Dsiteprefix=/app -Duseshrplib -Duseithreads -Duselargefiles -Dman1dir=none -Dman3dir=none
-      - make -j${FLATPAK_BUILDER_N_JOBS}
-      - make install
-    sources:
-      - type: archive
-        url: https://www.cpan.org/src/5.0/perl-5.42.2.tar.xz
-        sha256: 0a585eeb9e363c0f80482ddb3571625250c2c86aeb408853e8ea50805cfb14bb
-    cleanup:
-      - /share
-
   - name: leptonica
     buildsystem: autotools
     config-opts:
@@ -70,6 +54,23 @@ modules:
       - /bin
       - /share/tessdata
 
+  - name: perl
+    buildsystem: simple
+    build-options:
+      # Perl's installed tree fails flatpak-builder debugedit/eu-strip in rofiles.
+      no-debuginfo: true
+    build-commands:
+      - ./Configure -des -Dprefix=/app -Dvendorprefix=/app -Dsiteprefix=/app -Duseshrplib -Duseithreads -Duselargefiles -Dman1dir=none -Dman3dir=none
+      - make -j${FLATPAK_BUILDER_N_JOBS}
+      - make install
+      - install -Dm755 perl /app/bin/perl
+    sources:
+      - type: archive
+        url: https://www.cpan.org/src/5.0/perl-5.42.2.tar.xz
+        sha256: 0a585eeb9e363c0f80482ddb3571625250c2c86aeb408853e8ea50805cfb14bb
+    cleanup:
+      - /share
+
   - name: tdarr-server
     buildsystem: simple
     build-commands:
@@ -79,7 +80,6 @@ modules:
       - chmod +x /app/tdarr/server/Tdarr_Server_Tray
       - chmod +x /app/tdarr/server/runtime/Tdarr_Server_Runtime
       - chmod +x /app/tdarr/server/runtime/pnpm
-      - sed -i '1s|^#!.*perl.*|#!/app/bin/perl -w|' /app/tdarr/server/node_modules/exiftool-vendored.pl/bin/exiftool
       - chmod +x /app/tdarr/server/node_modules/exiftool-vendored.pl/bin/exiftool
       - >-
         sed -i 's|const env = { \.\.\.o.exiftoolEnv, LANG: "C" };|const env = { PATH: process.env.PATH, HOME: process.env.HOME, ...o.exiftoolEnv, LANG: "C" };|' /app/tdarr/server/node_modules/exiftool-vendored/dist/ExifTool.js
@@ -88,6 +88,8 @@ modules:
         url: https://storage.tdarr.io/versions/2.71.01/linux_x64/Tdarr_Server.zip
         sha256: 5721c8e06e073fe2f5d8734b5d4a4668ad400bc5875c3a16b03263b435da4b62
         strip-components: 0
+      - type: patch
+        path: patches/exiftool-flatpak-perl.patch
 
   - name: tdarr-server-integration
     buildsystem: simple
