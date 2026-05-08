@@ -5,9 +5,6 @@ sdk: org.gnome.Sdk
 command: tdarr-server-flatpak
 separate-locales: false
 
-build-options:
-  no-debuginfo: true
-
 finish-args:
   - --share=ipc
   - --share=network
