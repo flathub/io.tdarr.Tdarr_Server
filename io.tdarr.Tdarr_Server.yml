@@ -75,40 +75,41 @@ modules:
     buildsystem: simple
     build-commands:
       - mkdir -p /app/tdarr/server
-      - cp -a . /app/tdarr/server/
+      - cp -a tdarr-server/. /app/tdarr/server/
       - chmod +x /app/tdarr/server/Tdarr_Server
       - chmod +x /app/tdarr/server/Tdarr_Server_Tray
       - chmod +x /app/tdarr/server/runtime/Tdarr_Server_Runtime
       - chmod +x /app/tdarr/server/runtime/pnpm
       - chmod +x /app/tdarr/server/node_modules/exiftool-vendored.pl/bin/exiftool
+      - install -Dm755 integration/tdarr-server-flatpak /app/bin/tdarr-server-flatpak
+      - install -Dm644 integration/io.tdarr.Tdarr_Server.desktop /app/share/applications/io.tdarr.Tdarr_Server.desktop
+      - install -Dm644 integration/io.tdarr.Tdarr_Server.metainfo.xml /app/share/metainfo/io.tdarr.Tdarr_Server.metainfo.xml
+      - install -Dm644 integration/logo512.png /app/share/icons/hicolor/512x512/apps/io.tdarr.Tdarr_Server.png
+      - install -Dm644 integration/LICENSE.md /app/share/licenses/io.tdarr.Tdarr_Server/LICENSE.md
     sources:
       - type: archive
         url: https://storage.tdarr.io/versions/2.71.01/linux_x64/Tdarr_Server.zip
         sha256: 5721c8e06e073fe2f5d8734b5d4a4668ad400bc5875c3a16b03263b435da4b62
         strip-components: 0
-
-  - name: tdarr-server-integration
-    buildsystem: simple
-    build-commands:
-      - install -Dm755 tdarr-server-flatpak /app/bin/tdarr-server-flatpak
-      - install -Dm644 io.tdarr.Tdarr_Server.desktop /app/share/applications/io.tdarr.Tdarr_Server.desktop
-      - install -Dm644 io.tdarr.Tdarr_Server.metainfo.xml /app/share/metainfo/io.tdarr.Tdarr_Server.metainfo.xml
-      - install -Dm644 logo512.png /app/share/icons/hicolor/512x512/apps/io.tdarr.Tdarr_Server.png
-      - install -Dm644 LICENSE.md /app/share/licenses/io.tdarr.Tdarr_Server/LICENSE.md
-    sources:
+        dest: tdarr-server
       - type: file
         path: wrappers/tdarr-server-flatpak
+        dest: integration
       - type: file
         url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/4210e9224e2c426ed673ca621a73b1fef6dddae2/flatpak/io.tdarr.Tdarr_Server.desktop
         sha256: 611af708f6fccda96d21d1116195e2c42dd8a31068600d51eb73fed94dfb2ae3
+        dest: integration
       - type: file
         url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/4210e9224e2c426ed673ca621a73b1fef6dddae2/flatpak/io.tdarr.Tdarr_Server.metainfo.xml
         sha256: de235f14098789ffa771d8455ebca8d228a9e4cd4a1b9a6107a39a91b26b72be
+        dest: integration
       - type: file
         url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/4210e9224e2c426ed673ca621a73b1fef6dddae2/flatpak/io.tdarr.Tdarr_Server.png
         sha256: 91106d113a447207ac83e5aabc930fc7d782ddac7c63e8966dce99e7c826bcbc
+        dest: integration
         dest-filename: logo512.png
       - type: file
         url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/4210e9224e2c426ed673ca621a73b1fef6dddae2/LICENSE.md
         sha256: 0dede92d4421de2668e268783a03c5834078f81a8c694f59900e43a40528c4cf
+        dest: integration
         dest-filename: LICENSE.md
