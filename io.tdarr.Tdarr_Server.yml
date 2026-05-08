@@ -26,6 +26,9 @@ modules:
   - shared-modules/libayatana-appindicator/libayatana-appindicator-gtk3.json
   - name: perl
     buildsystem: simple
+    build-options:
+      # Perl's installed tree fails flatpak-builder debugedit/eu-strip in rofiles.
+      no-debuginfo: true
     build-commands:
       - ./Configure -des -Dprefix=/app -Dvendorprefix=/app -Dsiteprefix=/app -Duseshrplib -Duseithreads -Duselargefiles -Dman1dir=none -Dman3dir=none
       - make -j${FLATPAK_BUILDER_N_JOBS}
@@ -98,13 +101,16 @@ modules:
       - type: file
         path: wrappers/tdarr-server-flatpak
       - type: file
-        path: desktop/io.tdarr.Tdarr_Server.desktop
+        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/4210e9224e2c426ed673ca621a73b1fef6dddae2/flatpak/io.tdarr.Tdarr_Server.desktop
+        sha256: 611af708f6fccda96d21d1116195e2c42dd8a31068600d51eb73fed94dfb2ae3
       - type: file
-        path: metainfo/io.tdarr.Tdarr_Server.metainfo.xml
+        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/4210e9224e2c426ed673ca621a73b1fef6dddae2/flatpak/io.tdarr.Tdarr_Server.metainfo.xml
+        sha256: de235f14098789ffa771d8455ebca8d228a9e4cd4a1b9a6107a39a91b26b72be
       - type: file
-        path: icons/io.tdarr.Tdarr_Server.png
+        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/4210e9224e2c426ed673ca621a73b1fef6dddae2/flatpak/io.tdarr.Tdarr_Server.png
+        sha256: 91106d113a447207ac83e5aabc930fc7d782ddac7c63e8966dce99e7c826bcbc
         dest-filename: logo512.png
       - type: file
-        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/master/LICENSE.md
+        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/4210e9224e2c426ed673ca621a73b1fef6dddae2/LICENSE.md
         sha256: 0dede92d4421de2668e268783a03c5834078f81a8c694f59900e43a40528c4cf
         dest-filename: LICENSE.md
