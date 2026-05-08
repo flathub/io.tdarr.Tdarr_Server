@@ -96,20 +96,20 @@ modules:
         path: wrappers/tdarr-server-flatpak
         dest: integration
       - type: file
-        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/4210e9224e2c426ed673ca621a73b1fef6dddae2/flatpak/io.tdarr.Tdarr_Server.desktop
+        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/0ce823ca459e1a1a079c096506691cad801237bf/flatpak/io.tdarr.Tdarr_Server.desktop
         sha256: 611af708f6fccda96d21d1116195e2c42dd8a31068600d51eb73fed94dfb2ae3
         dest: integration
       - type: file
-        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/4210e9224e2c426ed673ca621a73b1fef6dddae2/flatpak/io.tdarr.Tdarr_Server.metainfo.xml
-        sha256: de235f14098789ffa771d8455ebca8d228a9e4cd4a1b9a6107a39a91b26b72be
+        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/0ce823ca459e1a1a079c096506691cad801237bf/flatpak/io.tdarr.Tdarr_Server.metainfo.xml
+        sha256: daa7e5e626a485f2da15d7f1ec913f18f4cbcfaef5ec0eec85bb83a8a073813e
         dest: integration
       - type: file
-        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/4210e9224e2c426ed673ca621a73b1fef6dddae2/flatpak/io.tdarr.Tdarr_Server.png
+        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/0ce823ca459e1a1a079c096506691cad801237bf/flatpak/io.tdarr.Tdarr_Server.png
         sha256: 91106d113a447207ac83e5aabc930fc7d782ddac7c63e8966dce99e7c826bcbc
         dest: integration
         dest-filename: logo512.png
       - type: file
-        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/4210e9224e2c426ed673ca621a73b1fef6dddae2/LICENSE.md
+        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/0ce823ca459e1a1a079c096506691cad801237bf/LICENSE.md
         sha256: 0dede92d4421de2668e268783a03c5834078f81a8c694f59900e43a40528c4cf
         dest: integration
         dest-filename: LICENSE.md
