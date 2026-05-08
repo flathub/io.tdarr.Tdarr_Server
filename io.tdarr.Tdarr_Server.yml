@@ -86,10 +86,6 @@ modules:
         url: https://storage.tdarr.io/versions/2.71.01/linux_x64/Tdarr_Server.zip
         sha256: 5721c8e06e073fe2f5d8734b5d4a4668ad400bc5875c3a16b03263b435da4b62
         strip-components: 0
-      - type: patch
-        path: patches/exiftool-flatpak-perl.patch
-      - type: patch
-        path: patches/exiftool-flatpak-env.patch
 
   - name: tdarr-server-integration
     buildsystem: simple
