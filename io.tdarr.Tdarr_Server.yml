@@ -12,7 +12,6 @@ finish-args:
   - --socket=wayland
   - --device=dri
   - --filesystem=xdg-videos
-  - --talk-name=org.freedesktop.Notifications
   - --talk-name=org.kde.StatusNotifierWatcher
 
 cleanup:
@@ -53,13 +52,11 @@ modules:
 
   - name: perl
     buildsystem: simple
-    build-options:
-      # Perl's installed tree fails flatpak-builder debugedit/eu-strip in rofiles.
-      no-debuginfo: true
     build-commands:
       - ./Configure -des -Dprefix=/app -Dvendorprefix=/app -Dsiteprefix=/app -Duseshrplib -Duseithreads -Duselargefiles -Dman1dir=none -Dman3dir=none
       - make -j${FLATPAK_BUILDER_N_JOBS}
       - make install
+      - find /app/lib/perl5 -type f -exec chmod u+w {} \;
       - install -Dm755 perl /app/bin/perl
     sources:
       - type: archive
