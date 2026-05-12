@@ -92,8 +92,8 @@ modules:
         sha256: 611af708f6fccda96d21d1116195e2c42dd8a31068600d51eb73fed94dfb2ae3
         dest: integration
       - type: file
-        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/f16a19749367eae2995b2b4eee8cc7e38b41d085/flatpak/io.tdarr.Tdarr_Server.metainfo.xml
-        sha256: c432520183e93347bc58aa76d36974ef832cb2bd13d6f3a90584a4acb0dd46f7
+        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/b5c1daa621484cfd5cf575b2196966baa162b4bb/flatpak/io.tdarr.Tdarr_Server.metainfo.xml
+        sha256: 4fecb36f7a1c86a31eb2d3a1860af6bb3d9dcf8a972e3ee0d04f674a9478196e
         dest: integration
       - type: file
         url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/0ce823ca459e1a1a079c096506691cad801237bf/flatpak/io.tdarr.Tdarr_Server.png
