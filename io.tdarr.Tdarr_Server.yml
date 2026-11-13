@@ -83,8 +83,8 @@ modules:
       - install -Dm644 integration/LICENSE.md /app/share/licenses/io.tdarr.Tdarr_Server/LICENSE.md
     sources:
       - type: archive
-        url: https://storage.tdarr.io/versions/3.07.00/linux_x64/Tdarr_Server.zip
-        sha256: 0f1f7cd83cbf07eaa7fcc7cd8c96673ae56ef629f7cfdb1513c55008d58a1169
+        url: https://storage.tdarr.io/versions/3.08.00/linux_x64/Tdarr_Server.zip
+        sha256: bf34333e75d326a5b2d6977ce7e60fd0a181fb307c0ec5892bec190481e6b2fb
         strip-components: 0
         dest: tdarr-server
       - type: file
@@ -92,8 +92,8 @@ modules:
         sha256: 611af708f6fccda96d21d1116195e2c42dd8a31068600d51eb73fed94dfb2ae3
         dest: integration
       - type: file
-        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/64d7f0840b29ea69ad3ab99dc906357365edbd20/flatpak/io.tdarr.Tdarr_Server.metainfo.xml
-        sha256: e808595392ea0bcb5fc93f34deace245795d6505ed62f16169d495c55f5d325d
+        url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/c968ed691e8141900f1b8015664b2a59bddcd6fb/flatpak/io.tdarr.Tdarr_Server.metainfo.xml
+        sha256: 9585dd0edb094b995f83471aca732aaa51434402b81a5ed2b32f98f3b3f9372b
         dest: integration
       - type: file
         url: https://raw.githubusercontent.com/HaveAGitGat/Tdarr/0ce823ca459e1a1a079c096506691cad801237bf/flatpak/io.tdarr.Tdarr_Server.png
